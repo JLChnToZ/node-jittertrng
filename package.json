@@ -1,0 +1,20 @@
+{
+  "name": "jittertrng",
+  "version": "0.0.1",
+  "description": "Bindings for Jitterentropy Library - A Hardware RNG based on CPU timing jitter",
+  "main": "./lib/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "trng",
+    "rng",
+    "random",
+    "jitterentropy"
+  ],
+  "author": "Jeremy Lam \"JLChnToZ\"",
+  "license": "MIT",
+  "dependencies": {
+    "nan": "^2.8.0"
+  }
+}

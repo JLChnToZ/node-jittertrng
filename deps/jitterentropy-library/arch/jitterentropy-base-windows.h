@@ -1,4 +1,8 @@
 /*
+ * This file is modified from jitterentropy-base-x86-windows.h for general
+ * support on Windows platform via WinAPI instead of assembly code.
+ * Original licenese header is kept below:
+ * 
  * Non-physical true random number generator based on timing jitter.
  *
  * Copyright Stephan Mueller <smueller@chronox.de>, 2013
@@ -57,7 +61,6 @@ typedef uint64_t __u64;
 static void jent_get_nstime(__u64 *out)
 {
 	uint64_t tmp = 0;
-	SYSTEMTIME systemTime;
 	FILETIME fileTime;
 	GetSystemTimePreciseAsFileTime(&fileTime);
 	tmp = fileTime.dwHighDateTime;

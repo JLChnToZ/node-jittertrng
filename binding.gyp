@@ -2,7 +2,10 @@
   "targets": [
     {
       "target_name": "jittertrng-native",
-      "sources": [ "src/native-bindings.cc", "deps/jitterentropy-library/jitterentropy-base.c" ],
+      "sources": [
+        "src/native-bindings.cc",
+        "deps/jitterentropy-library/jitterentropy-base.c"
+      ],
       "include_dirs": [
         "<!(node -e \"require('nan')\")"
       ],
@@ -11,6 +14,8 @@
           "configuration": {
             "Release": { "msvs_settings": { "VCCLCompilerTool": { "Optimization": 0 } } }
           }
+        }, {
+          "cflags": ["-Wextra", "-Wall", "-pedantic", "-fPIC", "-O0"]
         }]
       ]
     }

@@ -20,6 +20,10 @@ export declare class JitterTrng {
    */
   read(buf: Buffer, size?: number): number;
 
+  readAsync(buf: Buffer, size?: number): Promise<number>;
+  readAsync(buf: Buffer, callback: (err: Error, count: number) => void): void;
+  readAsync(buf: Buffer, size: number, callback: (err: Error, count: number) => void): void;
+
   /**
    * Generate a float-point number between 0 and 1.
    */
@@ -38,6 +42,13 @@ export declare class JitterTrng {
    */
   random(low: number, high: number): number;
 
+  randomAsync(): Promise<number>;
+  randomAsync(max: number): Promise<number>;
+  randomAsync(low: number, high: number): Promise<number>;
+  randomAsync(callback: (err: Error, result: number) => void): void;
+  randomAsync(max: number, callback: (err: Error, result: number) => void): void;
+  randomAsync(low: number, high: number, callback: (err: Error, result: number) => void): void;
+
   /**
    * Generate a integer number between 0 and the value given.
    * @param max The number that generated number must not greater or equals to
@@ -51,12 +62,20 @@ export declare class JitterTrng {
    */
   randomInt(low: number, high: number): number;
 
+  randomIntAsync(max: number): Promise<number>;
+  randomIntAsync(low: number, high: number): Promise<number>;
+  randomIntAsync(max: number, callback: (err: Error, result: number) => void): void;
+  randomIntAsync(low: number, high: number, callback: (err: Error, result: number) => void): void;
+
   /**
    * Get a buffer that fills with random bytes.
    * @param byteCount How many bytes should be in the buffer.
    * @returns A buffer fill with random bytes, but keep in mind that it still has chance that entropy does not enough to fufill the count requested.
    */
   generate(byteCount: number): Buffer;
+
+  generateAsync(byteCount: number): Promise<Buffer>;
+  generateAsync(byteCount: number, callback: (err: Error, result: Buffer) => void): void;
 };
 
 /**

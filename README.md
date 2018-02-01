@@ -10,6 +10,25 @@ Usage
 
 Please refer to [index.d.ts](lib/index.d.ts) for exposed classes. :)
 
+Example
+```javascript
+const rng = new JitterTrng();
+
+async function() {
+  console.log(await rng.randomAsync(100)); // Asynchronous call, get a float-point number between 0 and 100
+}
+
+console.log(rng.randomInt(1234, 5678)); // Synchronous call, gets an integer number between 1234 and 5678
+
+const randombytes = rng.generate(100); // Gets 100 random bytes as a buffer.
+
+rng.generateAsync(10000, (err, buffer) => {
+  // Gets 10000 random bytes as a buffer.
+});
+// Getting large amount of random bits at once is slow, therefore asynchronous call will be safer as this does not block the javascript execution thread.
+// Also, all asynchronous methods also provides old-school callback flow for use.
+```
+
 Installation
 ------------
 

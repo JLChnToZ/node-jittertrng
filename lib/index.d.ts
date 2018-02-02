@@ -82,7 +82,7 @@ export declare class JitterTrng {
  * Flags that controls the behaviour of Jitterentropy TRNG.
  * For the usage details please refer to the mandoc `Jitterentropy(3)`.
  */
-export declare enum JitterentropyFlags {
+export declare const enum JitterentropyFlags {
   NONE = 0,
   /**
    * Disables theuse of the stirring function with the

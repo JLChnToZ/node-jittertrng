@@ -8,8 +8,8 @@ export declare class JitterTrng {
    * @param flags Internal flags changes the bahaviour of the TRNG. Default is `NONE`.
    */
   constructor(
-    osr: number = 1,
-    flags: JitterentropyFlags = JitterentropyFlags.NONE
+    osr?: number,
+    flags?: JitterentropyFlags
   );
 
   /**
@@ -76,7 +76,7 @@ export declare class JitterTrng {
 
   generateAsync(byteCount: number): Promise<Buffer>;
   generateAsync(byteCount: number, callback: (err: Error, result: Buffer) => void): void;
-};
+}
 
 /**
  * Flags that controls the behaviour of Jitterentropy TRNG.

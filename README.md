@@ -1,7 +1,12 @@
 Node JitterTRNG
 ===============
+[![GitHub issues](https://img.shields.io/github/issues/JLChnToZ/node-jittertrng.svg)](https://github.com/JLChnToZ/node-jittertrng/issues)
+[![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+[![Node version](https://img.shields.io/node/v/jittertrng.svg)](package.json)
+[![NPM version](https://img.shields.io/npm/v/jittertrng.svg)](https://www.npmjs.com/package/jittertrng)
+[![NPM downloads](https://img.shields.io/npm/dt/jittertrng.svg)](https://www.npmjs.com/package/jittertrng)
 
-This is a wrapper of jitterentropy-library, which is a Hardware RNG based on CPU timing jitter, for Node.js.
+This is a wrapper of jitterentropy-library, which is a hardware RNG based on CPU timing jitter, wrapped for Node.js.
 
 For more information about this library, it is better to visit its site, [www.chronox.de/jent.html](http://www.chronox.de/jent.html).
 
@@ -10,7 +15,7 @@ This is my first attempt to create a native C++ module for Node.js, therefore it
 Usage
 -----
 
-Please refer to [index.d.ts](lib/index.d.ts) for exposed classes. :)
+Please refer to [documentation](https://code.moka-rin.moe/jittertrng) for exposed classes. :)
 
 Example
 ```javascript
@@ -36,11 +41,11 @@ rng.generateAsync(10000, (err, buffer) => {
 Installation
 ------------
 
-Currently this is still in alpha stage, and I will publish this to NPM soon.
-
-If it has been published, it should be installable to Node.js projects via NPM by typing `npm i jittertrng` in terminals.
-
-Meanwhile, you still can use `npm i JLChnToZ/node-jittertrng` to install this module as your project's dependency.
+You can use
+```sh
+$ npm i jittertrng
+```
+to install this package.
 
 As this is a native addon module, to use it you will have to prepare suitable C++ compilers (gcc for *nix systems and Visual C++ with Windows SDK for Windows systems) and node-gyp as a global dependency. Prebuilt binaries are not yet available, sorry about that :(
 

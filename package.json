@@ -5,9 +5,11 @@
   "main": "./lib/index.js",
   "types": "./lib/index.d.ts",
   "engines": {
-    "node" : ">=7.10.1"
+    "node": ">=7.10.1"
   },
   "scripts": {
+    "rebuild": "node-gyp rebuild",
+    "build-doc": "typedoc --mode file --includeDeclarations --excludeExternals --excludePrivate --readme README.md --out docs/ lib/"
   },
   "repository": {
     "type": "git",
@@ -23,5 +25,9 @@
   "license": "MIT",
   "dependencies": {
     "nan": "^2.8.0"
+  },
+  "devDependencies": {
+    "@types/node": "^9.4.0",
+    "typedoc": "^0.10.0"
   }
 }

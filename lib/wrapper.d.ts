@@ -1,3 +1,7 @@
+/// <reference types="node" />
+
+import { Buffer } from 'buffer';
+
 /**
  * Wrapper for Jitterentropy True Random Number Generator
  */
@@ -16,7 +20,9 @@ export declare class JitterTrng {
    * Collect some random bytes from the Jitterentropy with provided buffer.
    * @param buf The buffer object to contain the random bytes.
    * @param size How many bytes to be collected, maximum is the buffer size.
-   * @returns A number that indicates how many bytes has been collected to the buffer. Zero or negative values means something wrong is happened, please refer to mandoc `Jitterentropy(3)` for details.
+   * @returns A number that indicates how many bytes has been collected to the buffer.
+   * Zero or negative values means something wrong is happened,
+   * please refer to mandoc `Jitterentropy(3)` for details.
    */
   read(buf: Buffer, size?: number): number;
 
@@ -70,7 +76,8 @@ export declare class JitterTrng {
   /**
    * Get a buffer that fills with random bytes.
    * @param byteCount How many bytes should be in the buffer.
-   * @returns A buffer fill with random bytes, but keep in mind that it still has chance that entropy does not enough to fufill the count requested.
+   * @returns A buffer fill with random bytes, but keep in mind that it still has chance
+   * that entropy does not enough to fufill the count requested.
    */
   generate(byteCount: number): Buffer;
 

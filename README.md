@@ -15,7 +15,7 @@ This is my first attempt to create a native C++ module for Node.js, therefore it
 Usage
 -----
 
-Please refer to [documentation](https://code.moka-rin.moe/jittertrng) for exposed classes. :)
+Please refer to [documentation](https://code.moka-rin.moe/node-jittertrng) for exposed classes. :)
 
 Example
 ```javascript

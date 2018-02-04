@@ -143,6 +143,7 @@
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter tsd-is-inherited"><a href="randomstream.html#unpipe" class="tsd-kind-icon">unpipe</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="randomstream.html#unshift" class="tsd-kind-icon">unshift</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="randomstream.html#wrap" class="tsd-kind-icon">wrap</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-static"><a href="randomstream.html#create" class="tsd-kind-icon">create</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-static"><a href="randomstream.html#listenercount-1" class="tsd-kind-icon">listener<wbr>Count</a></li>
 							</ul>
 						</section>
@@ -155,7 +156,8 @@
 					<a name="constructor" class="tsd-anchor"></a>
 					<h3>constructor</h3>
 					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class tsd-is-overwrite">
-						<li class="tsd-signature tsd-kind-icon">new <wbr>Random<wbr>Stream<span class="tsd-signature-symbol">(</span>options<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">ReadableOptions</span>, osr<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span>, flags<span class="tsd-signature-symbol">?: </span><a href="../enums/jitterentropyflags.html" class="tsd-signature-type">JitterentropyFlags</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="randomstream.html" class="tsd-signature-type">RandomStream</a></li>
+						<li class="tsd-signature tsd-kind-icon">new <wbr>Random<wbr>Stream<span class="tsd-signature-symbol">(</span>highWaterMark<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span>, osr<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span>, flags<span class="tsd-signature-symbol">?: </span><a href="../enums/jitterentropyflags.html" class="tsd-signature-type">JitterentropyFlags</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="randomstream.html" class="tsd-signature-type">RandomStream</a></li>
+						<li class="tsd-signature tsd-kind-icon">new <wbr>Random<wbr>Stream<span class="tsd-signature-symbol">(</span>options<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ReadableOptions</span>, osr<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span>, flags<span class="tsd-signature-symbol">?: </span><a href="../enums/jitterentropyflags.html" class="tsd-signature-type">JitterentropyFlags</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="randomstream.html" class="tsd-signature-type">RandomStream</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
@@ -176,12 +178,54 @@
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5><span class="tsd-flag ts-flagOptional">Optional</span> options: <span class="tsd-signature-type">ReadableOptions</span></h5>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> highWaterMark: <span class="tsd-signature-type">number</span></h5>
 									<div class="tsd-comment tsd-typography">
 										<div class="lead">
-											<p>Options passed to the undely readable stream</p>
+											<p>High water mark indicates the stream will going to
+												fill until the amount of bytes reach this number, default is <code>16384</code> (16kb).
+												Higher values will take more time (depends on the running speed of the machine)
+											to fill up and get ready to use and lower values will drain the stream more quickly</p>
 										</div>
 									</div>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> osr: <span class="tsd-signature-type">number</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<div class="lead">
+											<p>Oversampling, default is <code>1</code> (No oversample)</p>
+										</div>
+									</div>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> flags: <a href="../enums/jitterentropyflags.html" class="tsd-signature-type">JitterentropyFlags</a></h5>
+									<div class="tsd-comment tsd-typography">
+										<div class="lead">
+											<p>Flags controls the Jitterentropy behaviour</p>
+										</div>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="randomstream.html" class="tsd-signature-type">RandomStream</a></h4>
+						</li>
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Overrides Readable.__constructor</p>
+								<ul>
+									<li>Defined in <a href="https://github.com/JLChnToZ/node-jittertrng/blob/f1edfa2/lib/rndstream.d.ts#L23">rndstream.d.ts:23</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Construct a buffered random pool.
+										Have a reminder that this stream works asynchronously and the random bytes cannot
+										serve immediately thus you might result getting <code>undefined</code> if you
+									impatient to get the random numbers.</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>options: <span class="tsd-signature-type">ReadableOptions</span></h5>
 								</li>
 								<li>
 									<h5><span class="tsd-flag ts-flagOptional">Optional</span> osr: <span class="tsd-signature-type">number</span></h5>
@@ -833,7 +877,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/JLChnToZ/node-jittertrng/blob/f1edfa2/lib/rndstream.d.ts#L29">rndstream.d.ts:29</a></li>
+									<li>Defined in <a href="https://github.com/JLChnToZ/node-jittertrng/blob/f1edfa2/lib/rndstream.d.ts#L33">rndstream.d.ts:33</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -1827,7 +1871,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/JLChnToZ/node-jittertrng/blob/f1edfa2/lib/rndstream.d.ts#L34">rndstream.d.ts:34</a></li>
+									<li>Defined in <a href="https://github.com/JLChnToZ/node-jittertrng/blob/f1edfa2/lib/rndstream.d.ts#L38">rndstream.d.ts:38</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -1843,7 +1887,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/JLChnToZ/node-jittertrng/blob/f1edfa2/lib/rndstream.d.ts#L40">rndstream.d.ts:40</a></li>
+									<li>Defined in <a href="https://github.com/JLChnToZ/node-jittertrng/blob/f1edfa2/lib/rndstream.d.ts#L44">rndstream.d.ts:44</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -1868,7 +1912,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/JLChnToZ/node-jittertrng/blob/f1edfa2/lib/rndstream.d.ts#L47">rndstream.d.ts:47</a></li>
+									<li>Defined in <a href="https://github.com/JLChnToZ/node-jittertrng/blob/f1edfa2/lib/rndstream.d.ts#L51">rndstream.d.ts:51</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -1909,7 +1953,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/JLChnToZ/node-jittertrng/blob/f1edfa2/lib/rndstream.d.ts#L53">rndstream.d.ts:53</a></li>
+									<li>Defined in <a href="https://github.com/JLChnToZ/node-jittertrng/blob/f1edfa2/lib/rndstream.d.ts#L57">rndstream.d.ts:57</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -1934,7 +1978,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/JLChnToZ/node-jittertrng/blob/f1edfa2/lib/rndstream.d.ts#L60">rndstream.d.ts:60</a></li>
+									<li>Defined in <a href="https://github.com/JLChnToZ/node-jittertrng/blob/f1edfa2/lib/rndstream.d.ts#L64">rndstream.d.ts:64</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -2401,6 +2445,73 @@
 						</li>
 					</ul>
 				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-static">
+					<a name="create" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagStatic">Static</span> create</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-static">
+						<li class="tsd-signature tsd-kind-icon">create<span class="tsd-signature-symbol">(</span>highWaterMark<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span>, osr<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span>, flags<span class="tsd-signature-symbol">?: </span><a href="../enums/jitterentropyflags.html" class="tsd-signature-type">JitterentropyFlags</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="randomstream.html" class="tsd-signature-type">RandomStream</a><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon">create<span class="tsd-signature-symbol">(</span>options<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ReadableOptions</span>, osr<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span>, flags<span class="tsd-signature-symbol">?: </span><a href="../enums/jitterentropyflags.html" class="tsd-signature-type">JitterentropyFlags</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="randomstream.html" class="tsd-signature-type">RandomStream</a><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/JLChnToZ/node-jittertrng/blob/f1edfa2/lib/rndstream.d.ts#L75">rndstream.d.ts:75</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Creates a random pool stream in a promise which resolves when it is ready to use.</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> highWaterMark: <span class="tsd-signature-type">number</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>High water mark indicates the stream will going to
+											fill until the amount of bytes reach this number, default is <code>16384</code> (16kb).
+											Higher values will take more time (depends on the running speed of the machine)
+										to fill up and get ready to use and lower values will drain the stream more quickly</p>
+									</div>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> osr: <span class="tsd-signature-type">number</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>Oversampling, default is <code>1</code> (No oversample)</p>
+									</div>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> flags: <a href="../enums/jitterentropyflags.html" class="tsd-signature-type">JitterentropyFlags</a></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>Flags controls the Jitterentropy behaviour</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="randomstream.html" class="tsd-signature-type">RandomStream</a><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/JLChnToZ/node-jittertrng/blob/f1edfa2/lib/rndstream.d.ts#L76">rndstream.d.ts:76</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>options: <span class="tsd-signature-type">ReadableOptions</span></h5>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> osr: <span class="tsd-signature-type">number</span></h5>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> flags: <a href="../enums/jitterentropyflags.html" class="tsd-signature-type">JitterentropyFlags</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="randomstream.html" class="tsd-signature-type">RandomStream</a><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
 				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-static">
 					<a name="listenercount-1" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagStatic">Static</span> listener<wbr>Count</h3>
@@ -2555,6 +2666,9 @@
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
 								<a href="randomstream.html#wrap" class="tsd-kind-icon">wrap</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-static">
+								<a href="randomstream.html#create" class="tsd-kind-icon">create</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-static">
 								<a href="randomstream.html#listenercount-1" class="tsd-kind-icon">listener<wbr>Count</a>

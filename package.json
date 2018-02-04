@@ -1,6 +1,6 @@
 {
   "name": "jittertrng",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Bindings for Jitterentropy Library - A Hardware RNG based on CPU timing jitter",
   "main": "./lib/index.js",
   "types": "./lib/index.d.ts",

@@ -38,6 +38,34 @@ rng.generateAsync(10000, (err, buffer) => {
 // Also, all asynchronous methods also provides old-school callback flow for use.
 ```
 
+Or in a more convenient way:
+```javascript
+const { RandomStream } = require('jittertrng');
+
+(async() => {
+  const rng = await RandomStream.create(1024); // Create a buffered random pool with 1024 bytes.
+  // You also can use `new RandomStream(...)` constructor, but you have to be patient
+  // because the pool does not immediately get ready after it constructs. (Async logic is used here)
+  rng.random();
+  rng.random(1, 10);
+  rng.randomInt(1, 100);
+  // Keep in mind that if the pool is already drain (and of cause it will starts to fill up at the background),
+  // whatever you want to get, you will get undefined.
+})();
+```
+
+Limits
+------
+
+As this is a true random number generator, it is not very efficient to get large amount of random numbers directly,
+even here I have made asynchronous direct and buffered methods to access the entropy. If you needs random values immediately at anytime
+and doesn't really mind the randomness, it is recommend to use other pseudo random number generators as a fallback,
+or you have another option to just use this as a source of seed for other pseudo random number generators.
+
+Also, I don't make the memory secure here, this wrapper just pulls the random bytes out and pass it to the JavaScript engine,
+nothing is protecting them to prevent third party to access or spy on them.
+So if anyone wants to use this in something secure-critical is not recommend.
+
 Installation
 ------------
 

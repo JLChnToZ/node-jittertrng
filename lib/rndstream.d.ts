@@ -13,11 +13,15 @@ export declare class RandomStream extends Readable {
    * Have a reminder that this stream works asynchronously and the random bytes cannot
    * serve immediately thus you might result getting `undefined` if you
    * impatient to get the random numbers.
-   * @param options Options passed to the undely readable stream
+   * @param highWaterMark High water mark indicates the stream will going to
+   * fill until the amount of bytes reach this number, default is `16384` (16kb).
+   * Higher values will take more time (depends on the running speed of the machine)
+   * to fill up and get ready to use and lower values will drain the stream more quickly
    * @param osr Oversampling, default is `1` (No oversample)
    * @param flags Flags controls the Jitterentropy behaviour
    */
-  constructor(options?: ReadableOptions, osr?: number, flags?: JitterentropyFlags);
+  constructor(highWaterMark?: number, osr?: number, flags?: JitterentropyFlags);
+  constructor(options: ReadableOptions, osr?: number, flags?: JitterentropyFlags);
 
   /**
    * Pops a positive integer number from the random buffer.  
@@ -58,4 +62,16 @@ export declare class RandomStream extends Readable {
    * @param max The number that generated number must not greater or equals to
    */
   randomInt(min: number, max: number): number | undefined;
+
+  /**
+   * Creates a random pool stream in a promise which resolves when it is ready to use.
+   * @param highWaterMark High water mark indicates the stream will going to
+   * fill until the amount of bytes reach this number, default is `16384` (16kb).
+   * Higher values will take more time (depends on the running speed of the machine)
+   * to fill up and get ready to use and lower values will drain the stream more quickly
+   * @param osr Oversampling, default is `1` (No oversample)
+   * @param flags Flags controls the Jitterentropy behaviour
+   */
+  static create(highWaterMark?: number, osr?: number, flags?: JitterentropyFlags): Promise<RandomStream>;
+  static create(options: ReadableOptions, osr?: number, flags?: JitterentropyFlags): Promise<RandomStream>;
 }

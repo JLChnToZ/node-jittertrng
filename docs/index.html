@@ -92,6 +92,28 @@ rng.generateAsync(<span class="hljs-number">10000</span>, (err, buffer) =&gt; {
 <span class="hljs-comment">// Getting large amount of random bits at once is slow, therefore asynchronous call will be safer as this does not block the javascript execution thread.</span>
 <span class="hljs-comment">// Also, all asynchronous methods also provides old-school callback flow for use.</span>
 </code></pre>
+				<p>Or in a more convenient way:</p>
+				<pre><code class="lang-javascript"><span class="hljs-keyword">const</span> { RandomStream } = <span class="hljs-built_in">require</span>(<span class="hljs-string">'jittertrng'</span>);
+
+<span class="hljs-function">(<span class="hljs-params"><span class="hljs-keyword">async</span>(</span>) =&gt;</span> {
+  <span class="hljs-keyword">const</span> rng = <span class="hljs-keyword">await</span> RandomStream.create(<span class="hljs-number">1024</span>); <span class="hljs-comment">// Create a buffered random pool with 1024 bytes.</span>
+  <span class="hljs-comment">// You also can use `new RandomStream(...)` constructor, but you have to be patient</span>
+  <span class="hljs-comment">// because the pool does not immediately get ready after it constructs. (Async logic is used here)</span>
+  rng.random();
+  rng.random(<span class="hljs-number">1</span>, <span class="hljs-number">10</span>);
+  rng.randomInt(<span class="hljs-number">1</span>, <span class="hljs-number">100</span>);
+  <span class="hljs-comment">// Keep in mind that if the pool is already drain (and of cause it will starts to fill up at the background),</span>
+  <span class="hljs-comment">// whatever you want to get, you will get undefined.</span>
+})();
+</code></pre>
+				<h2 id="limits">Limits</h2>
+				<p>As this is a true random number generator, it is not very efficient to get large amount of random numbers directly,
+					even here I have made asynchronous direct and buffered methods to access the entropy. If you needs random values immediately at anytime
+					and doesn&#39;t really mind the randomness, it is recommend to use other pseudo random number generators as a fallback,
+				or you have another option to just use this as a source of seed for other pseudo random number generators.</p>
+				<p>Also, I don&#39;t make the memory secure here, this wrapper just pulls the random bytes out and pass it to the JavaScript engine,
+					nothing is protecting them to prevent third party to access or spy on them.
+				So if anyone wants to use this in something secure-critical is not recommend.</p>
 				<h2 id="installation">Installation</h2>
 				<p>You can use</p>
 				<pre><code class="lang-sh">$ npm i jittertrng

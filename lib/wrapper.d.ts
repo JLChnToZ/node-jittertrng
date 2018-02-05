@@ -45,15 +45,18 @@ export declare class JitterTrng {
    * Generate a float-point number between the values given.
    * @param low The number that generated number must not smaller to
    * @param high The number that generated number must not greater or equals to
+   * @param precision How many bytes will be used to get the number.
+   * Minimum is 1 (1 / 256 fragments), maximum is 6 (1 / 281,474,976,710,656 fragments), default is 6
    */
-  random(low: number, high: number): number;
+  random(low: number, high: number, precision?: number): number;
 
   randomAsync(): Promise<number>;
   randomAsync(max: number): Promise<number>;
-  randomAsync(low: number, high: number): Promise<number>;
+  randomAsync(low: number, high: number, precision?: number): Promise<number>;
   randomAsync(callback: (err: Error, result: number) => void): void;
   randomAsync(max: number, callback: (err: Error, result: number) => void): void;
   randomAsync(low: number, high: number, callback: (err: Error, result: number) => void): void;
+  randomAsync(low: number, high: number, precision: number, callback: (err: Error, result: number) => void): void;
 
   /**
    * Generate an integer number between 0 and the value given.

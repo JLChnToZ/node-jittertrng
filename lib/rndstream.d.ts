@@ -47,8 +47,10 @@ export declare class RandomStream extends Readable {
    * Pops a float-point number between the values given.
    * @param min The number that generated number must not smaller to
    * @param max The number that generated number must not greater or equals to
+   * @param precision How many bytes will be used to get the number.
+   * Minimum is 1 (1 / 256 fragments), maximum is 6 (1 / 281,474,976,710,656 fragments), default is 6
    */
-  random(min: number, max: number): number | undefined;
+  random(min: number, max: number, precision?: number): number | undefined;
   
   /**
    * Pops an integer number between 0 and the value given.

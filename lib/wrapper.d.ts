@@ -101,7 +101,7 @@ export declare class JitterTrng {
  * Flags that controls the behaviour of Jitterentropy TRNG.
  * For the usage details please refer to the mandoc `Jitterentropy(3)`.
  */
-export declare const enum JitterentropyFlags {
+export declare enum JitterentropyFlags {
   NONE = 0,
   /**
    * Disables theuse of the stirring function with the
@@ -118,4 +118,46 @@ export declare const enum JitterentropyFlags {
    * on the complexity of the CPU.
    */
   JENT_DISABLE_MEMORY_ACCESS = 4,
+}
+
+/**
+ * Error codes for init function.
+ */
+export declare enum JitterentropyInitErrorCodes {
+  /**
+   * No error.
+   */
+  OK = 0,
+  /**
+   * Timer service not available.
+   */
+  ENOTIME = 1,
+  /**
+   * Timer too coarse for RNG.
+   */
+  ECOARSETIME = 2,
+  /**
+   * Timer is not monotonic increasing.
+   */
+  ENOMONOTONIC = 3,
+  /**
+   * Timer variations too small for RNG.
+   */
+  EMINVARIATION = 4,
+  /**
+   * Timer does not produce variations of variations (2nd derivation of time is zero).
+   */
+  EVARVAR = 5,
+  /**
+   * Timer variations of variations is too small.
+   */
+  EMINVARVAR = 6,
+  /**
+   * Programming error.
+   */
+  EPROGERR = 7,
+  /**
+   * Too many stuck results during init.
+   */
+  ESTUCK = 8,
 }

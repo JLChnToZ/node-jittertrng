@@ -23,7 +23,7 @@ class JitterTrngWorker : public Nan::AsyncWorker {
       v8::Local<v8::Value> argv[] = {
         Nan::New<v8::Number>((uint32_t)result_)
       };
-      callback->Call(1, argv);
+      callback->Call(1, argv, async_resource);
     }
   private:
     rand_data* collector_;
@@ -73,23 +73,29 @@ class JitterTrng : public Nan::ObjectWrap {
       const int argc = 2;
       v8::Local<v8::Value> argv[argc] = { info[0], info[1] };
       v8::Local<v8::Function> cons = Nan::New(constructor());
-      info.GetReturnValue().Set(cons->NewInstance(argc, argv));
+      info.GetReturnValue().Set(Nan::NewInstance(cons, argc, argv).ToLocalChecked());
     }
   }
 
   static NAN_METHOD(ReadEntropy) {
     JitterTrng* obj = Nan::ObjectWrap::Unwrap<JitterTrng>(info.Holder());
-    char* buffer = (char*)node::Buffer::Data(info[0]->ToObject());
-    size_t size = info[1]->IsUndefined() ? node::Buffer::Length(info[0]) : info[1]->Uint32Value();
+    char* buffer = (char*)node::Buffer::Data(Nan::To<v8::Object>(info[0]).ToLocalChecked());
+    size_t size = info[1]->IsUndefined() ?
+      node::Buffer::Length(info[0]) :
+      Nan::To<unsigned int>(info[1]).FromJust();
     ssize_t result = jent_read_entropy(obj->collector_, buffer, size);
     info.GetReturnValue().Set(Nan::New((uint32_t)result));
   }
 
   static NAN_METHOD(ReadEntropyWorker) {
     JitterTrng* obj = Nan::ObjectWrap::Unwrap<JitterTrng>(info.Holder());
-    char* buffer = (char*)node::Buffer::Data(info[0]->ToObject());
-    size_t size = info[1]->IsUndefined() ? node::Buffer::Length(info[0]) : info[1]->Uint32Value();
-    Nan::Callback* callback = new Nan::Callback(Nan::To<v8::Function>(info[1]->IsFunction() ? info[1] : info[2]).ToLocalChecked());
+    char* buffer = (char*)node::Buffer::Data(Nan::To<v8::Object>(info[0]).ToLocalChecked());
+    size_t size = info[1]->IsUndefined() ?
+      node::Buffer::Length(info[0]) :
+      Nan::To<unsigned int>(info[1]).FromJust();
+    Nan::Callback* callback = new Nan::Callback(Nan::To<v8::Function>(
+      info[1]->IsFunction() ? info[1] : info[2]
+    ).ToLocalChecked());
     AsyncQueueWorker(new JitterTrngWorker(callback, obj->collector_, buffer, size));
   }
 

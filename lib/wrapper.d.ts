@@ -1,5 +1,3 @@
-/// <reference types="node" />
-
 import { Buffer } from 'buffer';
 
 /**

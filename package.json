@@ -24,10 +24,10 @@
   "author": "Jeremy Lam \"JLChnToZ\"",
   "license": "MIT",
   "dependencies": {
+    "@types/node": "*",
     "nan": "*"
   },
   "devDependencies": {
-    "@types/node": "*",
     "typedoc": "*"
   }
 }

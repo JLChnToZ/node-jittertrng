@@ -1,5 +1,3 @@
-/// <reference types="node" />
-
 import { Readable, ReadableOptions } from 'stream';
 import { JitterentropyFlags } from './wrapper';
 

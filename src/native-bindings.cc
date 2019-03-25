@@ -23,7 +23,7 @@ class JitterTrngWorker : public Nan::AsyncWorker {
       v8::Local<v8::Value> argv[] = {
         Nan::New<v8::Number>((uint32_t)result_)
       };
-      callback->Call(1, argv, async_resource);
+      callback->Call(1, argv);
     }
   private:
     rand_data* collector_;

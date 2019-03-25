@@ -28,6 +28,6 @@
     "nan": "*"
   },
   "devDependencies": {
-    "typedoc": "*"
+    "typedoc": "^0.14.2"
   }
 }

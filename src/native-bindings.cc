@@ -49,7 +49,7 @@ class JitterTrng : public Nan::ObjectWrap {
     Nan::Set(
       target,
       Nan::New("init").ToLocalChecked(),
-      Nan::New<v8::FunctionTemplate>(InitEngine)->GetFunction()
+      Nan::GetFunction(Nan::New<v8::FunctionTemplate>(InitEngine)).ToLocalChecked()
     );
   }
 

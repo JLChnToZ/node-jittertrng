@@ -60,16 +60,6 @@ typedef uint64_t __u64;
 
 static void jent_get_nstime(__u64 *out)
 {
-	uint64_t tmp = 0;
-	FILETIME fileTime;
-#if _WIN32_WINNT >= _WIN32_WINNT_WIN8
-	GetSystemTimePreciseAsFileTime(&fileTime);
-#else
-	GetSystemTimeAsFileTime(&fileTime);
-#endif
-	tmp = fileTime.dwHighDateTime;
-	tmp <<= 32;
-	tmp |= fileTime.dwLowDateTime;
 	*out = (__u64)__rdtsc();
 }
 

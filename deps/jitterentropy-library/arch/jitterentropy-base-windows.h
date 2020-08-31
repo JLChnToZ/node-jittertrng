@@ -43,13 +43,13 @@
  * DAMAGE.
  */
 
-#ifndef _JITTERENTROPY_BASE_X86_H
-#define _JITTERENTROPY_BASE_X86_H
+#ifndef _JITTERENTROPY_BASE_WINDOWS_H
+#define _JITTERENTROPY_BASE_WINDOWS_H
 
 #include <stdint.h>
 #include <stdlib.h>
 #include <string.h>
-#include <windows.h>
+#include <intrin.h>
 
 #if defined(_MSC_VER)
 #include <BaseTsd.h>
@@ -70,7 +70,7 @@ static void jent_get_nstime(__u64 *out)
 	tmp = fileTime.dwHighDateTime;
 	tmp <<= 32;
 	tmp |= fileTime.dwLowDateTime;
-	*out = tmp;
+	*out = (__u64)__rdtsc();
 }
 
 static inline void *jent_zalloc(size_t len)
@@ -92,7 +92,7 @@ static inline void jent_zfree(void *ptr, unsigned int len)
 
 static inline int jent_fips_enabled(void)
 {
-        return 0;
+	return 0;
 }
 
 /* --- helpers needed in user space -- */
@@ -105,5 +105,5 @@ static inline __u64 rol64(__u64 word, unsigned int shift)
 }
 
 
-#endif /* _JITTERENTROPY_BASE_X86_H */
+#endif /* _JITTERENTROPY_BASE_WINDOWS_H */
 
